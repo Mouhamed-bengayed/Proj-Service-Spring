@@ -26,9 +26,9 @@ public class CommentService  {
             return null;
         }
     }
-    public List<Service> gettAllComment(){
+    public List<Service> getAllComment(){
         commentRepository.findAll();
-        return gettAllComment();
+        return getAllComment();
     }
 
 }

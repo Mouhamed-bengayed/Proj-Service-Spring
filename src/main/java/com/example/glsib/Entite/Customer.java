@@ -15,7 +15,6 @@ public class Customer extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @OneToMany(mappedBy = "customer")
     private List<Comment> comment;
     @OneToMany(mappedBy = "customer")
