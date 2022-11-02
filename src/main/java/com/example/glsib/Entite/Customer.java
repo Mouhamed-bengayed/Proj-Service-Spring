@@ -12,9 +12,8 @@ import java.util.List;
 @JsonIdentityInfo(property = "id",generator =  ObjectIdGenerators.PropertyGenerator.class)
 
 public class Customer extends User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
+    private boolean valid;
     @OneToMany(mappedBy = "customer")
     private List<Comment> comment;
     @OneToMany(mappedBy = "customer")

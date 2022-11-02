@@ -12,9 +12,8 @@ import java.util.List;
 @Data
 @JsonIdentityInfo(property = "id",generator =  ObjectIdGenerators.PropertyGenerator.class)
 public class Provider extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
+
     private String diploma;
     private int avis;
     private String image;
@@ -22,7 +21,6 @@ public class Provider extends User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Service service;
     private String description;
-
     @OneToMany(mappedBy = "provider")
     private List<Message> message;
 
