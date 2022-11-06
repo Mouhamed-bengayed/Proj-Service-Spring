@@ -13,7 +13,6 @@ import java.util.List;
 @JsonIdentityInfo(property = "id",generator =  ObjectIdGenerators.PropertyGenerator.class)
 public class Provider extends User {
 
-
     private String diploma;
     private int avis;
     private String image;
@@ -23,6 +22,4 @@ public class Provider extends User {
     private String description;
     @OneToMany(mappedBy = "provider")
     private List<Message> message;
-
-
 }
