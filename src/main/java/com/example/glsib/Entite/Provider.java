@@ -7,12 +7,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-
+/*
 @Entity
 @Data
 @JsonIdentityInfo(property = "id",generator =  ObjectIdGenerators.PropertyGenerator.class)
 public class Provider extends User {
-
 
     private String diploma;
     private int avis;
@@ -23,6 +22,5 @@ public class Provider extends User {
     private String description;
     @OneToMany(mappedBy = "provider")
     private List<Message> message;
-
-
 }
+*/

@@ -1,5 +1,5 @@
 package com.example.glsib.Controller;
-
+/*
 import com.example.glsib.Entite.Customer;
 import com.example.glsib.Entite.Provider;
 import com.example.glsib.Service.ProviderService;
@@ -31,3 +31,4 @@ public class ProviderController {
         providerService.deleteProvider(idProvider);
     }
 }
+*/

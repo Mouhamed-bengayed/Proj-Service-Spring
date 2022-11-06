@@ -6,6 +6,8 @@ import com.example.glsib.Entite.Service;
 import com.example.glsib.Service.CommentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authorization.AuthorityAuthorizationManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +24,8 @@ public class CommentController {
 
 
     @GetMapping("/list-Comment")
-    public List<Comment> ListComment() {
-        return commentService.getAllComment();
-    }
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Comment> ListComment() {return commentService.getAllComment();}
 
     @DeleteMapping("/delete-comment/{idcomment}")
     public void deletecomment(@PathVariable("idLevel") Long idcomment) {
@@ -35,6 +36,5 @@ public class CommentController {
     public Comment addLevel(@RequestBody @Validated Comment c1) {
         return commentService.addService(c1);
     }
-
 
 }

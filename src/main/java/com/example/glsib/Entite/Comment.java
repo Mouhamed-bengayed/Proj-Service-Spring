@@ -16,7 +16,7 @@ public class Comment {
     private Double prix;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Customer customer;
+    private User user;
 
 
 

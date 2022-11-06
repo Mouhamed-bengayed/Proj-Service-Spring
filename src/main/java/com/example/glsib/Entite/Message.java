@@ -13,10 +13,17 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String message;
+    /*
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Provider provider;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
+    */
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private User user;
+
+
 }

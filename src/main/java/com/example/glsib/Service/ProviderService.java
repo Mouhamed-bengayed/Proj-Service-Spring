@@ -1,5 +1,5 @@
 package com.example.glsib.Service;
-
+/*
 import com.example.glsib.Entite.Customer;
 import com.example.glsib.Entite.Provider;
 import com.example.glsib.Service.MailSenderService;
@@ -44,3 +44,4 @@ MailSenderService mailSenderService;
 
 
 }
+*/

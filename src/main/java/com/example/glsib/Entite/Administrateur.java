@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
-
+/*
 
 @Entity
 @Data
@@ -15,3 +15,4 @@ public class Administrateur extends User {
     @OneToMany(mappedBy = "administrateur")
     private List<Service> service;
 }
+*/

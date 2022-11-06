@@ -14,9 +14,14 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
+    /*
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Administrateur administrateur;
+*/
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private User user;
 
 
 
