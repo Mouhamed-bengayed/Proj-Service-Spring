@@ -8,14 +8,27 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String[] PUBLIC_ENDPOINTS={
             "/api/provider/list-provider",
-            "/api/provider/add-provider"
-
+            "/api/provider/add-provider",
+            "/api/auth/signup",
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/ -resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/swagger-ui/index.html",
+            "/swagger-resources",
+            "/configuration/security",
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
     };
 
     @Override
@@ -35,5 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder()
+    {
+        return new BCryptPasswordEncoder();
     }
 }

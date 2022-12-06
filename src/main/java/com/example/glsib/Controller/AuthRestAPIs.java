@@ -10,20 +10,17 @@ import com.example.glsib.jwt.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -39,7 +36,7 @@ public class AuthRestAPIs {
     @Autowired
     RoleRepository roleRepository;
 
-
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -48,7 +45,7 @@ public class AuthRestAPIs {
     @Autowired
     MailSenderService mailSending;
 
-    @PostMapping("/signin")
+    @PostMapping("/signIn")
     public ResponseEntity<JwtResponse> authenticateUser(@RequestParam(name="username") String username, @RequestParam(name="password") String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username,password)
@@ -60,6 +57,7 @@ public class AuthRestAPIs {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
+  //@PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<User> registerUser(@Validated @RequestBody User user1)   {
         if(userRepository.existsByUsername(user1.getUsername())) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -67,7 +65,6 @@ public class AuthRestAPIs {
         if(userRepository.existsByEmail(user1.getEmail())) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-
         User user = new User(user1.getName(),user1.getUsername(),user1.getEmail(),passwordEncoder.encode(user1.getPassword()),false);
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository.findByName(RoleName.ROLE_USER)

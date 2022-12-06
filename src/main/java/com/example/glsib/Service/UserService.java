@@ -15,8 +15,6 @@ public class UserService {
     UserRepository userRepository;
 
 
-
-
     public User deleteCustomer(Long id) {
         Optional<User> customer = userRepository.findById(id);
         if (((Optional<?>) customer).isPresent()) {
@@ -30,4 +28,5 @@ public class UserService {
         userRepository.findAll();
         return getAllUser();
     }
+
 }

@@ -5,6 +5,7 @@ import com.example.glsib.Entite.User;
 import com.example.glsib.Entite.UserPrinciple;
 import com.example.glsib.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
