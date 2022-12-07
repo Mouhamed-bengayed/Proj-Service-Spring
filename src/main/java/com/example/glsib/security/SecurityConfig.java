@@ -18,6 +18,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/provider/list-provider",
             "/api/provider/add-provider",
             "/api/auth/signup",
+            "/api/service/list-Service",
+            "/api/service/delete-Service/{idService}",
+            "/api/service/add-Service",
+
             "/v2/api-docs",
             "/configuration/ui",
             "/ -resources/**",
