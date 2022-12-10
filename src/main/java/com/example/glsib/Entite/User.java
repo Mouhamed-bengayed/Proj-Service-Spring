@@ -1,5 +1,6 @@
 package com.example.glsib.Entite;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 
@@ -7,7 +8,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-import java.util.Collection;
+
 import java.util.HashSet;
 import java.util.Set;
 @Data
@@ -31,6 +32,9 @@ public  class User {
     private String token;
     private String username;
 
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private City city;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -38,6 +42,10 @@ public  class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+  @ManyToOne
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+  private Service service;
 
     public User(String name, String username, String email, String password, boolean b) {
         this.name=name;

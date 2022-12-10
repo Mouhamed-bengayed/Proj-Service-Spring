@@ -29,7 +29,7 @@ public class ServiceController {
 
 
     @GetMapping("/list-Service")
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     public List<Service> ListService() {return service.gettAllService();}
 
     @DeleteMapping("/delete-Service/{idService}")
@@ -51,8 +51,6 @@ public class ServiceController {
     @PostMapping("/add-Service")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "add service")
-
-
         public Service addService(@RequestBody @Validated Service s1) {
         return service.addService(s1);
     }

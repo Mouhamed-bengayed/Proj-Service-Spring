@@ -1,5 +1,4 @@
 package com.example.glsib.Controller;
 
-public class UserController {
-
+public class CityController {
 }
