@@ -33,8 +33,8 @@ public class CommentController {
     }
 
     @PostMapping("/add-comment")
-    public Comment addLevel(@RequestBody @Validated Comment c1) {
-        return commentService.addService(c1);
+    public Comment addcomment(@RequestBody @Validated Comment c1) {
+        return commentService.addComment(c1);
     }
 
 }

@@ -3,7 +3,8 @@ package com.example.glsib.Service;
 import com.example.glsib.Entite.User;
 import com.example.glsib.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,20 +14,31 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    MailSenderService mailSending;
 
 
-    public User deleteCustomer(Long id) {
-        Optional<User> customer = userRepository.findById(id);
-        if (((Optional<?>) customer).isPresent()) {
-            return customer.get();
-        } else {
-            return null;
-        }
-    }
 
     public List<User> getAllUser() {
-        userRepository.findAll();
-        return getAllUser();
+        return  userRepository.findAll();
+    }
+
+    public void validInscription(Long id) {
+        Optional<User> user=userRepository.findById(id);
+        User user1=user.get();
+        String Newligne = System.getProperty("line.separator");
+        String url = "http://localhost:4200/auth/verification/" +user1.getToken();
+        String body = "Welcom to our platform \n  use this link to verify your account is :" + Newligne + url;
+        if(user.isPresent()) {
+
+            user1.setIsVerified(true);
+            this.userRepository.save(user1);
+            try {
+                mailSending.send(user1.getEmail(), "Welcome Provaider", body);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 }

@@ -12,7 +12,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String label;
     @OneToMany( fetch = FetchType.LAZY , cascade= CascadeType.ALL)
     @JsonIgnoreProperties
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

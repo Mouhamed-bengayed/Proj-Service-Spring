@@ -17,7 +17,7 @@ public class CommentService  {
     @Autowired
     CommentRepository commentRepository;
 
-    public Comment addService(Comment s1){
+    public Comment addComment(Comment s1){
         Comment savedComment = commentRepository.save(s1);
         return savedComment;
     }
@@ -31,8 +31,8 @@ public class CommentService  {
         }
     }
     public List<Comment> getAllComment(){
-        commentRepository.findAll();
-        return getAllComment();
+        return  commentRepository.findAll();
+
     }
 
 }

@@ -14,8 +14,8 @@ public class ServiceService  {
     ServiceRepository serviceRepository;
 
     public Service addService(Service s1){
-        Service savedArticle = serviceRepository.save(s1);
-        return savedArticle;
+        Service savedService = serviceRepository.save(s1);
+        return savedService;
     }
     public Service deleteService(Long id){
         Optional<Service>  service = serviceRepository.findById(id);
@@ -27,8 +27,7 @@ public class ServiceService  {
         }
     }
     public List<Service> gettAllService(){
-        serviceRepository.findAll();
-        return gettAllService();
+        return serviceRepository.findAll();
     }
 
 }

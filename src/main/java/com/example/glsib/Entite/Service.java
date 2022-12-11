@@ -16,9 +16,8 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nom;
-    @JsonIgnoreProperties("service")
-    @OneToMany(fetch = FetchType.LAZY , cascade=CascadeType.ALL,mappedBy = "service")
+    private String label;
+    @OneToMany(cascade=CascadeType.ALL,mappedBy = "service")
     private List<User> user;
 
 

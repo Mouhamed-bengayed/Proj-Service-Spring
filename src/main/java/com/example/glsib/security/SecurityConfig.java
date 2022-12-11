@@ -21,7 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/service/list-Service",
             "/api/service/delete-Service/{idService}",
             "/api/service/add-Service",
-
+            "/api/service/list-Service",
+             "/api/city/list-city",
+            "/api/city/add-city",
+            "/api/user/list-User",
             "/v2/api-docs",
             "/configuration/ui",
             "/ -resources/**",

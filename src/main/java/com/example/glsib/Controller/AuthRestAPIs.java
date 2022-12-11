@@ -71,8 +71,9 @@ public class AuthRestAPIs {
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
         roles.add(userRole);
         user.setRoles(roles);
+        user.setIsVerified(false);
         User suser= userRepository.save(user);
-        if(suser != null) {
+        if(suser != null ) {
             String Newligne = System.getProperty("line.separator");
             String url = "http://localhost:4200/auth/verification/" + suser.getToken();
             String body = "Welcom to our platform \n  use this link to verify your account is :" + Newligne + url;
@@ -110,7 +111,6 @@ public class AuthRestAPIs {
         if(userRepository.existsByEmail(user.getEmail())) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-
         User user1 = new User(user.getName(), user.getUsername(),
                 user.getEmail(),passwordEncoder.encode(user.getPassword()),false);
         Set<Role> roles = new HashSet<>();

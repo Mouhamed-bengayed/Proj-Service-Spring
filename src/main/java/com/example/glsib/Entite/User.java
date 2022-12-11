@@ -1,5 +1,6 @@
 package com.example.glsib.Entite;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public  class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String prenom;
+    private String username;
     private String email;
     private String password;
     private String adresse;
@@ -30,7 +31,7 @@ public  class User {
     private Boolean blocked;
     private Boolean isVerified;
     private String token;
-    private String username;
+     private String diplome;
 
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -43,8 +44,7 @@ public  class User {
     private Set<Role> roles = new HashSet<>();
 
   @ManyToOne
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-
+  @JsonIgnoreProperties("user")
   private Service service;
 
     public User(String name, String username, String email, String password, boolean b) {
