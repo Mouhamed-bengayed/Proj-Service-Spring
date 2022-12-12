@@ -29,5 +29,8 @@ public class UserController {
         userService.deleteUser(iduser);
     }
 
-
+    @PutMapping("/validate-user/{iduser}")
+    public void validInscription(@PathVariable("iduser") Long iduser) {
+        userService.validInscription(iduser);
+    }
 }

@@ -57,7 +57,7 @@ public class AuthRestAPIs {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-  //@PreAuthorize("hasRole('ROLE_USER')")
+     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<User> registerUser(@Validated @RequestBody User user1)   {
         if(userRepository.existsByUsername(user1.getUsername())) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -90,6 +90,53 @@ public class AuthRestAPIs {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }
+
+
+
+
+    @RequestMapping(value = "/signupprovaider", method = RequestMethod.POST)
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<User> registerProvaider(@Validated @RequestBody User user1)   {
+        if(userRepository.existsByUsername(user1.getUsername())) {
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+        if(userRepository.existsByEmail(user1.getEmail())) {
+            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+        }
+        User user = new User(user1.getName(),user1.getUsername(),user1.getEmail(),passwordEncoder.encode(user1.getPassword()),false);
+        Set<Role> roles = new HashSet<>();
+        Role userRole = roleRepository.findByName(RoleName.ROLE_PROVIDER)
+                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+        roles.add(userRole);
+        user.setRoles(roles);
+        user.setIsVerified(false);
+        User suser= userRepository.save(user);
+        if(suser != null ) {
+           // String Newligne = System.getProperty("line.separator");
+           // String url = "http://localhost:4200/auth/verification/" + suser.getToken()    + Newligne + url;
+            String body = "merci de votre inscription  \n vous attendre l'activation de administrateur :" ;
+            try {
+                mailSending.send(user.getEmail(), "Welcome", body);
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+            }
+        }
+        else
+        {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
+
+
+
+
+
+
     @RequestMapping(value="/getisverified/{token}",method = RequestMethod.GET)
     public ResponseEntity getisverified(@PathVariable String token){
         User user= userRepository.findByToken(token);
@@ -102,6 +149,7 @@ public class AuthRestAPIs {
             return ResponseEntity.ok(false);
         }
     }
+
 
     @RequestMapping(value = "/signupadmin", method = RequestMethod.POST)
     public ResponseEntity<User> registerAdmin(@Validated @RequestBody User user)  {
@@ -121,5 +169,6 @@ public class AuthRestAPIs {
         userRepository.save(user1);
         return new ResponseEntity<User>(user1, HttpStatus.OK);
     }
+
 
 }
