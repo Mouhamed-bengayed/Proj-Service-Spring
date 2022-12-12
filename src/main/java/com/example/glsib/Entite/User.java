@@ -10,6 +10,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 @Data
@@ -28,13 +29,13 @@ public  class User {
     private String password;
     private String adresse;
     private int number;
-    private Boolean blocked;
     private Boolean isVerified;
     private String token;
      private String diplome;
-
+   private Date date;
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  //  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "id_city")
     private City city;
 
     @ManyToMany(fetch = FetchType.LAZY)

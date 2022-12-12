@@ -16,7 +16,7 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String label;
+    private String nom;
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "service")
     private List<User> user;
 

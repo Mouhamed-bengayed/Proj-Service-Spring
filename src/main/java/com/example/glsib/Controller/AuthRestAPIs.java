@@ -63,7 +63,7 @@ public class AuthRestAPIs {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
         if(userRepository.existsByEmail(user1.getEmail())) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
         }
         User user = new User(user1.getName(),user1.getUsername(),user1.getEmail(),passwordEncoder.encode(user1.getPassword()),false);
         Set<Role> roles = new HashSet<>();

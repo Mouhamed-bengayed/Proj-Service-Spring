@@ -5,10 +5,7 @@ import com.example.glsib.Entite.User;
 import com.example.glsib.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin
@@ -17,12 +14,20 @@ import java.util.List;
 public class UserController {
 @Autowired
     UserService userService;
+    @GetMapping("/getUser/{idUser}")
 
-
+    public User getUserById(@PathVariable Long idUser){
+        return userService.getUserById(idUser);
+    }
 
 
     @GetMapping("/list-User")
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> ListUser() {return userService.getAllUser();}
+    @DeleteMapping("/delete-user/{iduser}")
+    public void deleteuser(@PathVariable("iduser") Long iduser) {
+        userService.deleteUser(iduser);
+    }
+
 
 }

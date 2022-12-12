@@ -1,5 +1,6 @@
 package com.example.glsib.Service;
 
+import com.example.glsib.Entite.Comment;
 import com.example.glsib.Entite.User;
 import com.example.glsib.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -22,6 +24,22 @@ public class UserService {
     public List<User> getAllUser() {
         return  userRepository.findAll();
     }
+
+
+    public User getUserById (Long idProvider){
+        return  userRepository.findById(idProvider).orElseThrow(()-> new IllegalArgumentException("Provider ID not Found"));
+    }
+    public User deleteUser(Long id){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()){
+            return user.get();
+        }else
+        {
+            return null;
+        }
+    }
+
+
 
     public void validInscription(Long id) {
         Optional<User> user=userRepository.findById(id);
